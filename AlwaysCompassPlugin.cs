@@ -7,16 +7,18 @@ namespace AlwaysCompass;
 [BepInAutoPlugin(id: "io.github.nov1ce-lee.alwayscompass")]
 public partial class AlwaysCompassPlugin : BaseUnityPlugin
 {
-    public static AlwaysCompassPlugin Instance { get; private set; }
-    public BepInEx.Configuration.ConfigEntry<bool> IsEnabled { get; private set; }
+    private static AlwaysCompassPlugin Instance;
+    private BepInEx.Configuration.ConfigEntry<bool> IsEnabled;
 
     private void Awake()
     {
         Instance = this;
-        // Configuration
-        IsEnabled = Config.Bind("General", "Enabled", true, "Enable or disable the Always Compass mod");
+        // 配置
+        IsEnabled = Config.Bind("General",      // 配置分组
+                                "Enabled",      // 配置项名称
+                                true,           // 默认值
+                                "Enable or disable the Always Compass mod");    // 配置项描述
 
-        // Put your initialization logic here
         Logger.LogInfo($"Plugin {Name} ({Id}) has loaded!");
 
         new Harmony(Id).PatchAll();
@@ -28,7 +30,7 @@ public partial class AlwaysCompassPlugin : BaseUnityPlugin
     {
         public static bool Prefix(ToolItem __instance, ref bool __result)
         {
-            // Check if mod is enabled
+            // 检查mod是否启用
             if (AlwaysCompassPlugin.Instance != null && !AlwaysCompassPlugin.Instance.IsEnabled.Value)
             {
                 return true;
@@ -51,7 +53,7 @@ public partial class AlwaysCompassPlugin : BaseUnityPlugin
     // {
     //     public static bool Prefix(ToolItemManager.ToolStatus __instance, ref bool __result)
     //     {
-    //         // Check if mod is enabled
+    //         // 检查mod是否启用
     //         if (AlwaysCompassPlugin.Instance != null && !AlwaysCompassPlugin.Instance.IsEnabled.Value)
     //         {
     //             return true;
