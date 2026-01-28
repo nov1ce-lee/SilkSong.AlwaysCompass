@@ -9,6 +9,12 @@ public static class ToolItemIsEquippedPatch
 {
     public static bool Prefix(ToolItem __instance, ref bool __result)
     {
+        // Check if mod is enabled
+        if (AlwaysCompassPlugin.Instance != null && !AlwaysCompassPlugin.Instance.IsEnabled.Value)
+        {
+            return true;
+        }
+
         // 如果是罗盘
         if (__instance == Gameplay.CompassTool)
         {
@@ -26,6 +32,12 @@ public static class ToolStatusIsEquippedPatch
 {
     public static bool Prefix(ToolItemManager.ToolStatus __instance, ref bool __result)
     {
+        // Check if mod is enabled
+        if (AlwaysCompassPlugin.Instance != null && !AlwaysCompassPlugin.Instance.IsEnabled.Value)
+        {
+            return true;
+        }
+
         // 如果这个状态对象管理的是罗盘
         if (__instance.tool == Gameplay.CompassTool)
         {
