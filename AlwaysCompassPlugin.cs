@@ -31,7 +31,7 @@ public partial class AlwaysCompassPlugin : BaseUnityPlugin
         public static bool Prefix(ToolItem __instance, ref bool __result)
         {
             // 检查mod是否启用
-            if (AlwaysCompassPlugin.Instance != null && !AlwaysCompassPlugin.Instance.IsEnabled.Value)
+            if (Instance != null && !Instance.IsEnabled.Value)
             {
                 return true;
             }
@@ -54,7 +54,7 @@ public partial class AlwaysCompassPlugin : BaseUnityPlugin
     //     public static bool Prefix(ToolItemManager.ToolStatus __instance, ref bool __result)
     //     {
     //         // 检查mod是否启用
-    //         if (AlwaysCompassPlugin.Instance != null && !AlwaysCompassPlugin.Instance.IsEnabled.Value)
+    //         if (Instance != null && !Instance.IsEnabled.Value)
     //         {
     //             return true;
     //         }
